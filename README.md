@@ -53,3 +53,5 @@ src/styles — SCSS styles
 ## 🧠 Notes
 
 All recipe data is fetched from the open API: https://www.themealdb.com/api.php
+
+Favorites will be saved on localstorage.
