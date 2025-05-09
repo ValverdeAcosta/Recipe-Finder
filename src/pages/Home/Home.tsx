@@ -3,15 +3,17 @@ import Title from "../../components/atoms/Title";
 import Input from "../../components/atoms/Input";
 import Button from "../../components/atoms/Button";
 import styles from "./Home.module.scss";
-import { useRecipeSearch } from "../../hooks/useRecipeSearch";
 import RecipeList from "../../components/organisms/RecipeList";
+import { useRecipeContext } from "../../context/RecipeContext";
 
 const Home: React.FC = () => {
   const [term, setTerm] = useState("");
-  const { recipes, loading, error, search } = useRecipeSearch();
+  const { recipes, searchRecipes } = useRecipeContext();
 
   const handleSearch = () => {
-    search(term);
+    if (term.trim()) {
+      searchRecipes(term);
+    }
   };
 
   return (
@@ -21,15 +23,15 @@ const Home: React.FC = () => {
         <Input
           placeholder="Enter ingredients or keyword..."
           value={term}
-          onChange={(e) => setTerm(e.target.value)}
+          onChange={(letter) => setTerm(letter.target.value)}
         />
         <Button variant="primary" onClick={handleSearch}>
           Search
         </Button>
       </div>
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      <RecipeList recipes={recipes} onSelect={() => {}} />
+      {/*loading && <p>Loading...</p>}
+      {error && <p>{error}</p>} */}
+      <RecipeList recipes={recipes} />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import styles from "./RecipeList.module.scss";
 
 import type { RecipeListProps } from "../../../types/recipe.types";
 
-const RecipeList: React.FC<RecipeListProps> = ({ recipes, onSelect }) => {
+const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
   return (
     <div className={styles.grid}>
       {recipes.map((recipe) => (
@@ -17,7 +17,6 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes, onSelect }) => {
               ? recipe.strInstructions.slice(0, 100) + "..."
               : recipe.strInstructions
           }
-          onClick={() => onSelect(recipe)}
         />
       ))}
     </div>

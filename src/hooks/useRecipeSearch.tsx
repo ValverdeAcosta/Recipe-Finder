@@ -23,14 +23,7 @@ export const useRecipeSearch = () => {
       );
       const data = response.data;
       if (data.meals) {
-        const formatted = data.meals.map((meal: any) => ({
-          id: meal.idMeal,
-          name: meal.strMeal,
-          thumbnail: meal.strMealThumb,
-          description: meal.strInstructions.slice(0, 120) + "...",
-          ingredients: [],
-        }));
-        setRecipes(formatted);
+        setRecipes(data.meals);
       } else {
         setRecipes([]);
         setError("No recipes found.");
@@ -40,6 +33,7 @@ export const useRecipeSearch = () => {
       setRecipes([]);
     } finally {
       setLoading(false);
+      console.log("Recipes fetched:", recipes);
     }
   };
 

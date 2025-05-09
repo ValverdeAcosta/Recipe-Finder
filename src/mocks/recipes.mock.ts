@@ -1,28 +1,68 @@
 import type { Recipe } from "../types/recipe.types";
 
+export const mockRecipe: Recipe = {
+  idMeal: "52795",
+  strMeal: "Chicken Handi",
+  strMealAlternate: null,
+  strCategory: "Chicken",
+  strArea: "Indian",
+  strInstructions:
+    "Take a large pot or wok, big enough to cook all the chicken, and heat the oil in it. Once the oil is hot...",
+  strMealThumb:
+    "https://www.themealdb.com/images/media/meals/wyxwsp1486979827.jpg",
+  strTags: null,
+  strYoutube: "https://www.youtube.com/watch?v=IO0issT0Rmc",
+  strSource: "",
+  strImageSource: null,
+  strCreativeCommonsConfirmed: null,
+  dateModified: null,
+
+  strIngredient1: "Chicken",
+  strIngredient2: "Onion",
+  strIngredient3: "Tomatoes",
+  strIngredient4: "Garlic",
+  strIngredient5: "Ginger paste",
+  strIngredient6: "Vegetable oil",
+  strIngredient7: "Cumin seeds",
+  strIngredient8: "Coriander seeds",
+  strIngredient9: "Turmeric powder",
+  strIngredient10: "Chilli powder",
+  strIngredient11: "Green chilli",
+  strIngredient12: "Yogurt",
+  strIngredient13: "Cream",
+  strIngredient14: "fenugreek",
+  strIngredient15: "Garam masala",
+  strIngredient16: "Salt",
+  strIngredient17: "",
+  strIngredient18: "",
+  strIngredient19: "",
+  strIngredient20: "",
+  strMeasure1: "1.2 kg",
+  strMeasure2: "5 thinly sliced",
+  strMeasure3: "2 finely chopped",
+  strMeasure4: "8 cloves chopped",
+  strMeasure5: "1 tbsp",
+  strMeasure6: "¼ cup",
+  strMeasure7: "2 tsp",
+  strMeasure8: "3 tsp",
+  strMeasure9: "1 tsp",
+  strMeasure10: "1 tsp",
+  strMeasure11: "2",
+  strMeasure12: "1 cup",
+  strMeasure13: "¾ cup",
+  strMeasure14: "3 tsp Dried",
+  strMeasure15: "1 tsp",
+  strMeasure16: "To taste",
+  strMeasure17: "",
+  strMeasure18: "",
+  strMeasure19: "",
+  strMeasure20: "",
+};
+
 export const mockRecipes: Recipe[] = [
   {
-    idMeal: "1",
-    strMeal: "Spaghetti Carbonara",
-    strMealThumb:
-      "https://www.themealdb.com/images/media/meals/llcbn01574260722.jpg",
-    strInstructions:
-      "Boil the spaghetti. Fry pancetta with garlic. Mix eggs with Parmesan. Combine all together off heat with a splash of pasta water.",
-  },
-  {
-    idMeal: "2",
-    strMeal: "Chicken Alfredo",
-    strMealThumb:
-      "https://www.themealdb.com/images/media/meals/syqypv1486981727.jpg",
-    strInstructions:
-      "Cook fettuccine. Sauté chicken. Prepare Alfredo sauce with cream, butter, and Parmesan. Combine everything and serve hot.",
-  },
-  {
-    idMeal: "3",
-    strMeal: "Beef Stroganoff",
-    strMealThumb:
-      "https://www.themealdb.com/images/media/meals/svprys1511176755.jpg",
-    strInstructions:
-      "Sear beef strips. Cook onions and mushrooms. Add sour cream and mustard. Simmer. Serve over egg noodles or rice.",
+    ...mockRecipe,
+    idMeal: "52796",
+    strMeal: "Chicken Curry",
   },
 ];

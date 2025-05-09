@@ -20,16 +20,36 @@ export interface InputProps
 
 export interface RecipeListProps {
   recipes: Recipe[];
-  onSelect: (recipe: Recipe) => void;
-}
-
-export interface SearchBarProps {
-  onSearch: (term: string) => void;
 }
 
 export interface RecipeCardProps {
   title: string;
   image: string;
   description: string;
-  onClick: () => void;
+}
+
+export interface Recipe {
+  idMeal: string;
+  strMeal: string;
+  strMealAlternate: string | null;
+  strCategory: string;
+  strArea: string;
+  strInstructions: string;
+  strMealThumb: string;
+  strTags: string | null;
+  strYoutube: string;
+  strSource: string;
+  strImageSource: string | null;
+  strCreativeCommonsConfirmed: string | null;
+  dateModified: string | null;
+
+  [key: `strIngredient${number}`]: string;
+  [key: `strMeasure${number}`]: string;
+}
+
+export interface RecipeContextProps {
+  recipes: Recipe[];
+  selectedRecipe: Recipe | null;
+  searchRecipes: (query: string) => Promise<void>;
+  getRecipeDetails: (id: string) => Promise<void>;
 }
