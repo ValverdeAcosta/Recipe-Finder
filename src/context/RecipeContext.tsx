@@ -1,7 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
 
 import type { Recipe, RecipeContextProps } from "../types/recipe.types";
-import { getRecipeDetailsById, getRecipesByName } from "../services/api";
+import {
+  getRecipeDetailsById,
+  getRecipesByName,
+  fetchAllRecipes,
+  fetchRecipesByPage,
+} from "../services/api";
 
 const RecipeContext = createContext<RecipeContextProps | undefined>(undefined);
 
@@ -21,9 +26,26 @@ export const RecipeProvider: React.FC<{ children: React.ReactNode }> = ({
     setSelectedRecipe(data || null);
   };
 
+  const getAllRecipes = async () => {
+    const data = await fetchAllRecipes();
+    setRecipes(data || []);
+  };
+
+  const loadRecipesByPage = async (page: string) => {
+    const data = await fetchRecipesByPage(page);
+    setRecipes(data || []);
+  };
+
   return (
     <RecipeContext.Provider
-      value={{ recipes, selectedRecipe, searchRecipes, getRecipeDetails }}
+      value={{
+        recipes,
+        selectedRecipe,
+        searchRecipes,
+        getRecipeDetails,
+        getAllRecipes,
+        loadRecipesByPage,
+      }}
     >
       {children}
     </RecipeContext.Provider>

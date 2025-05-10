@@ -23,6 +23,7 @@ export interface RecipeListProps {
 }
 
 export interface RecipeCardProps {
+  id: string;
   title: string;
   image: string;
   description: string;
@@ -52,4 +53,13 @@ export interface RecipeContextProps {
   selectedRecipe: Recipe | null;
   searchRecipes: (query: string) => Promise<void>;
   getRecipeDetails: (id: string) => Promise<void>;
+  getAllRecipes: () => Promise<void>;
+  loadRecipesByPage: (pageIndex: string) => Promise<void>;
+}
+
+export interface UseFavoritesReturn {
+  favorites: string[];
+  addFavorite: (recipeId: string) => void;
+  removeFavorite: (recipeId: string) => void;
+  isFavorite: (recipeId: string) => boolean;
 }

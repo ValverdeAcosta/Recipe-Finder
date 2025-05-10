@@ -10,6 +10,7 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
       {recipes.map((recipe) => (
         <RecipeCard
           key={recipe.idMeal}
+          id={recipe.idMeal}
           title={recipe.strMeal}
           image={recipe.strMealThumb}
           description={
