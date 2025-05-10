@@ -1,3 +1,9 @@
 @use "./styles/variables";
 @use "./styles/mixins";
 @use "./styles/global";
+
+body {
+  background-image: url("https://t4.ftcdn.net/jpg/08/16/95/33/360_F_816953339_TYAqdsex8tkd7jCu84pJTzndtoHDrcWX.jpg");
+  background-size: cover;
+  background-position: center;
+}

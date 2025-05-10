@@ -51,18 +51,20 @@ const Home: React.FC = () => {
   return (
     <div className={styles.container}>
       <Title text="🍽️ Recipe Finder" />
-      <button onClick={toggleFavorites} className="">
-        {showFavorites ? "Show All" : "Favorites"}
-      </button>
+      <Button onClick={toggleFavorites} className={styles.favoritesButton}>
+        {showFavorites ? "Show All 🗒️" : "Favorites 🩷"}
+      </Button>
       <div className={styles.searchBox}>
-        <Input
-          placeholder="Enter ingredients or keyword..."
-          value={term}
-          onChange={(letter) => setTerm(letter.target.value)}
-        />
-        <Button variant="primary" onClick={handleSearch}>
-          Search
-        </Button>
+        <div className={styles.searchBar}>
+          <Input
+            placeholder="Enter ingredients or keyword..."
+            value={term}
+            onChange={(letter) => setTerm(letter.target.value)}
+          />
+          <Button variant="primary" onClick={handleSearch}>
+            Search
+          </Button>
+        </div>
         <div className={styles.alphabetButtons}>
           {alphabet.split("").map((letter) => (
             <Button
