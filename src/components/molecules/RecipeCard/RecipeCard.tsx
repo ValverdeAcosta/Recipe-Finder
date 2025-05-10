@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./RecipeCard.module.scss";
 import type { RecipeCardProps } from "../../../types/recipe.types";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useFavorites } from "../../../hooks/useFavorites";
+import { useRecipeContext } from "../../../context/RecipeContext";
 
 const RecipeCard: React.FC<RecipeCardProps> = ({
   id,
@@ -11,15 +12,13 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
   description,
 }) => {
   const { toggleFavorite, isFavorite } = useFavorites();
+  const { setFavoriteStatus } = useRecipeContext();
   const [isFav, setIsFav] = useState(isFavorite(id));
-
-  useEffect(() => {
-    setIsFav(isFavorite(id));
-  }, [id, isFavorite]);
 
   const handleFavoriteClick = () => {
     toggleFavorite(id);
     setIsFav(!isFav);
+    setFavoriteStatus(!isFav);
   };
 
   return (

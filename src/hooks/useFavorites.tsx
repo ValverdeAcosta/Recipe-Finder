@@ -1,7 +1,8 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useFavorites = () => {
   let stored = localStorage.getItem("favorites");
+  const [favoritesChanged, setFavoritesChanged] = useState(false);
 
   useEffect(() => {
     stored = localStorage.getItem("favorites");
@@ -31,7 +32,7 @@ export const useFavorites = () => {
     const updatedFavorites = isAlreadyFavorite
       ? currentFavorites.filter((id) => id !== recipeId)
       : [...currentFavorites, recipeId];
-
+    setFavoritesChanged((prev) => !prev);
     saveFavorites(updatedFavorites);
   }, []);
 
@@ -39,5 +40,11 @@ export const useFavorites = () => {
     return getFavorites().includes(recipeId);
   }, []);
 
-  return { toggleFavorite, stored, isFavorite };
+  return {
+    toggleFavorite,
+    stored,
+    isFavorite,
+    favoritesChanged,
+    setFavoritesChanged,
+  };
 };

@@ -9,8 +9,13 @@ import { useFavorites } from "../../hooks/useFavorites";
 
 const Home: React.FC = () => {
   const [term, setTerm] = useState("");
-  const { recipes, searchRecipes, getAllRecipes, loadRecipesByPage } =
-    useRecipeContext();
+  const {
+    recipes,
+    searchRecipes,
+    getAllRecipes,
+    loadRecipesByPage,
+    favoriteStatus,
+  } = useRecipeContext();
   const { stored } = useFavorites();
   const [showFavorites, setShowFavorites] = useState(false);
   const [page, setPage] = useState("a");
@@ -41,12 +46,11 @@ const Home: React.FC = () => {
   const changePage = (page: string) => {
     setPage(page);
     setShowFavorites(false);
-    handleFavorites();
   };
 
   useEffect(() => {
     handleFavorites();
-  }, [showFavorites, page]);
+  }, [showFavorites, page, favoriteStatus]);
 
   return (
     <div className={styles.container}>

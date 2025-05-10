@@ -15,6 +15,7 @@ export const RecipeProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const [favoriteStatus, setFavoritesChanged] = useState(false);
 
   const searchRecipes = async (query: string) => {
     const data = await getRecipesByName(query);
@@ -36,14 +37,20 @@ export const RecipeProvider: React.FC<{ children: React.ReactNode }> = ({
     setRecipes(data || []);
   };
 
+  const setFavoriteStatus = (isFav: boolean) => {
+    setFavoritesChanged(isFav);
+  };
+
   return (
     <RecipeContext.Provider
       value={{
         recipes,
         selectedRecipe,
+        favoriteStatus,
         searchRecipes,
         getRecipeDetails,
         getAllRecipes,
+        setFavoriteStatus,
         loadRecipesByPage,
       }}
     >

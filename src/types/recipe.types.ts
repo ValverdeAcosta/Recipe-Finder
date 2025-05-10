@@ -51,9 +51,11 @@ export interface Recipe {
 export interface RecipeContextProps {
   recipes: Recipe[];
   selectedRecipe: Recipe | null;
+  favoriteStatus: boolean;
   searchRecipes: (query: string) => Promise<void>;
   getRecipeDetails: (id: string) => Promise<void>;
   getAllRecipes: () => Promise<void>;
+  setFavoriteStatus: (isFav: boolean) => void;
   loadRecipesByPage: (pageIndex: string) => Promise<void>;
 }
 
