@@ -79,6 +79,7 @@ const Home: React.FC = () => {
               <Button
                 key={letter}
                 variant="secondary"
+                className={page === letter ? styles.selectedLetter : ""}
                 onClick={() => handleAlphabetClick(letter)}
               >
                 {letter.toUpperCase()}

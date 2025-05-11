@@ -10,6 +10,12 @@
   border: 1px solid rgba(136, 40, 40, 0.125);
 }
 
+.selectedLetter {
+  border: 2px solid yellow;
+  font-weight: bold;
+  background-color: #fffbe6;
+}
+
 .searchBox {
   display: flex;
   flex-direction: column;
