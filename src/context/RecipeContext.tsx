@@ -47,6 +47,7 @@ export const RecipeProvider: React.FC<{ children: React.ReactNode }> = ({
         recipes,
         selectedRecipe,
         favoriteStatus,
+        setSelectedRecipe,
         searchRecipes,
         getRecipeDetails,
         getAllRecipes,

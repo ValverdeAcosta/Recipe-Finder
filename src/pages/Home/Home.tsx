@@ -6,11 +6,14 @@ import styles from "./Home.module.scss";
 import RecipeList from "../../components/organisms/RecipeList";
 import { useRecipeContext } from "../../context/RecipeContext";
 import { useFavorites } from "../../hooks/useFavorites";
+import RecipeFullDetailedModal from "../../components/molecules/RecipeFullDetailedModal/RecipeFullDetailedModal";
 
 const Home: React.FC = () => {
   const [term, setTerm] = useState("");
   const {
     recipes,
+    selectedRecipe,
+    setSelectedRecipe,
     searchRecipes,
     getAllRecipes,
     loadRecipesByPage,
@@ -36,11 +39,7 @@ const Home: React.FC = () => {
   };
 
   const handleFavorites = () => {
-    if (showFavorites) {
-      getAllRecipes();
-    } else {
-      loadRecipesByPage(page);
-    }
+    showFavorites ? getAllRecipes() : loadRecipesByPage(page);
   };
 
   const changePage = (page: string) => {
@@ -83,10 +82,19 @@ const Home: React.FC = () => {
       </div>
       {/*loading && <p>Loading...</p>}
       {error && <p>{error}</p>} */}
-      {showFavorites ? (
-        <RecipeList recipes={displayedRecipes} />
-      ) : (
-        <RecipeList recipes={recipes} />
+
+      {!selectedRecipe &&
+        (showFavorites ? (
+          <RecipeList recipes={displayedRecipes} />
+        ) : (
+          <RecipeList recipes={recipes} />
+        ))}
+
+      {selectedRecipe && (
+        <RecipeFullDetailedModal
+          recipe={selectedRecipe}
+          onClose={() => setSelectedRecipe(null)}
+        />
       )}
     </div>
   );

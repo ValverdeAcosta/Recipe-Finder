@@ -1,3 +1,8 @@
+export type RecipeFullDetailedProps = {
+  recipe: Recipe;
+  onClose: () => void;
+};
+
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
@@ -52,6 +57,7 @@ export interface RecipeContextProps {
   recipes: Recipe[];
   selectedRecipe: Recipe | null;
   favoriteStatus: boolean;
+  setSelectedRecipe: (recipe: Recipe | null) => void;
   searchRecipes: (query: string) => Promise<void>;
   getRecipeDetails: (id: string) => Promise<void>;
   getAllRecipes: () => Promise<void>;
