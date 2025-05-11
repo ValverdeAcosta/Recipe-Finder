@@ -3,10 +3,10 @@ import React, { createContext, useContext, useState } from "react";
 import type { Recipe, RecipeContextProps } from "../types/recipe.types";
 import {
   getRecipeDetailsById,
-  getRecipesByName,
   fetchAllRecipes,
   fetchRecipesByPage,
 } from "../services/api";
+import { useRecipeSearch } from "../hooks/useRecipeSearch";
 
 const RecipeContext = createContext<RecipeContextProps | undefined>(undefined);
 
@@ -16,9 +16,10 @@ export const RecipeProvider: React.FC<{ children: React.ReactNode }> = ({
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [favoriteStatus, setFavoritesChanged] = useState(false);
+  const { search } = useRecipeSearch();
 
   const searchRecipes = async (query: string) => {
-    const data = await getRecipesByName(query);
+    const data = await search(query);
     setRecipes(data || []);
   };
 

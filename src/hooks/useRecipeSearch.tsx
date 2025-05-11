@@ -3,7 +3,7 @@ import axios from "axios";
 import type { Recipe } from "../types/recipe.types";
 
 export const useRecipeSearch = () => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [matchingRecipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -13,29 +13,55 @@ export const useRecipeSearch = () => {
       return;
     }
 
+    setLoading(true);
+    setError("");
+
     try {
-      setLoading(true);
-      setError("");
-      const response = await axios.get(
+      const byTitle = await axios.get(
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(
           query
         )}`
       );
-      const data = response.data;
-      if (data.meals) {
-        setRecipes(data.meals);
+      const recipesByTitle = byTitle.data.meals || [];
+
+      const byIngredient = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(
+          query
+        )}`
+      );
+
+      const ingredientResults = byIngredient.data.meals || [];
+
+      const detailPromises = ingredientResults.map((meal: any) =>
+        axios.get(
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`
+        )
+      );
+
+      const detailResponses = await Promise.all(detailPromises);
+      const fullRecipesByIngredient = detailResponses
+        .map((res) => res.data.meals?.[0])
+        .filter(Boolean);
+
+      const all = [...recipesByTitle, ...fullRecipesByIngredient];
+      const uniqueRecipes = Array.from(
+        new Map(all.map((r: Recipe) => [r.idMeal, r])).values()
+      );
+
+      if (uniqueRecipes.length > 0) {
+        setRecipes(uniqueRecipes);
+        return uniqueRecipes;
       } else {
         setRecipes([]);
         setError("No recipes found.");
       }
     } catch (err) {
-      setError("Error fetching recipes");
       setRecipes([]);
+      setError("Error fetching recipes.");
     } finally {
       setLoading(false);
-      console.log("Recipes fetched:", recipes);
     }
   };
 
-  return { recipes, loading, error, search };
+  return { matchingRecipes, loading, error, search };
 };

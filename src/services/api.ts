@@ -3,12 +3,6 @@ import type { Recipe } from "../types/recipe.types";
 
 const BASE_URL = "https://www.themealdb.com/api/json/v1/1";
 
-export const getRecipesByName = async (query: string): Promise<Recipe[]> => {
-  const res = await fetch(`${BASE_URL}/search.php?s=${query}`);
-  const json = await res.json();
-  return json.meals || [];
-};
-
 export const getRecipeDetailsById = async (
   id: string
 ): Promise<Recipe | null> => {
@@ -21,7 +15,7 @@ export const fetchAllRecipes = async (): Promise<Recipe[]> => {
   const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
   const requests = alphabet.map((letter) =>
     axios
-      .get(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`)
+      .get(`${BASE_URL}/search.php?f=${letter}`)
       .then((res) => res.data.meals || [])
       .catch(() => [])
   );
@@ -37,7 +31,7 @@ export const fetchAllRecipes = async (): Promise<Recipe[]> => {
 
 export const fetchRecipesByPage = async (query: string): Promise<Recipe[]> => {
   const request = axios
-    .get(`https://www.themealdb.com/api/json/v1/1/search.php?f=${query}`)
+    .get(`${BASE_URL}/search.php?f=${query}`)
     .then((res) => res.data.meals || [])
     .catch(() => []);
 

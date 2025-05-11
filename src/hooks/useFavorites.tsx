@@ -32,7 +32,7 @@ export const useFavorites = () => {
     const updatedFavorites = isAlreadyFavorite
       ? currentFavorites.filter((id) => id !== recipeId)
       : [...currentFavorites, recipeId];
-    setFavoritesChanged((prev) => !prev);
+
     saveFavorites(updatedFavorites);
   }, []);
 
