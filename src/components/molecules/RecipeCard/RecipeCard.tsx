@@ -19,7 +19,6 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
     toggleFavorite(id);
     setIsFav(!isFav);
     setFavoriteStatus(!isFav);
-    console.log(!isFav);
   };
 
   const openFullDetails = async (id: string) => {

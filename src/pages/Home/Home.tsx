@@ -7,11 +7,13 @@ import RecipeList from "../../components/organisms/RecipeList";
 import { useRecipeContext } from "../../context/RecipeContext";
 import { useFavorites } from "../../hooks/useFavorites";
 import RecipeFullDetailedModal from "../../components/molecules/RecipeFullDetailedModal/RecipeFullDetailedModal";
+import { LuRefreshCcw } from "react-icons/lu";
 
 const Home: React.FC = () => {
   const [term, setTerm] = useState("");
   const [showFavorites, setShowFavorites] = useState(false);
   const [page, setPage] = useState("a");
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
   const {
     recipes,
@@ -30,13 +32,14 @@ const Home: React.FC = () => {
     return showFavorites
       ? recipes.filter((recipe) => stored?.includes(recipe.idMeal))
       : recipes;
-  }, [recipes, stored, showFavorites]);
+  }, [recipes, showFavorites]);
 
   const toggleFavorites = () => setShowFavorites((prev) => !prev);
 
   const handleSearch = () => {
     const trimmed = term.trim();
     if (trimmed) {
+      setIsSearchActive(true);
       searchRecipes(trimmed);
     }
   };
@@ -44,9 +47,16 @@ const Home: React.FC = () => {
   const handleAlphabetClick = (letter: string) => {
     setPage(letter);
     setShowFavorites(false);
+    setIsSearchActive(false);
+  };
+
+  const reloadPage = () => {
+    window.location.reload();
   };
 
   useEffect(() => {
+    if (isSearchActive) return;
+
     showFavorites ? getAllRecipes() : loadRecipesByPage(page);
   }, [showFavorites, page, favoriteStatus]);
 
@@ -79,12 +89,23 @@ const Home: React.FC = () => {
               <Button
                 key={letter}
                 variant="keycaps"
-                className={page === letter ? styles.selectedLetter : ""}
+                className={
+                  page === letter && !isSearchActive
+                    ? styles.selectedLetter
+                    : ""
+                }
                 onClick={() => handleAlphabetClick(letter)}
               >
                 {letter.toUpperCase()}
               </Button>
             ))}
+            <Button
+              key={"reload"}
+              variant="keycaps"
+              onClick={() => reloadPage()}
+            >
+              <LuRefreshCcw />
+            </Button>
           </div>
         </div>
       )}
