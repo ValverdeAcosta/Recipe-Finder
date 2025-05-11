@@ -4,22 +4,24 @@
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
   overflow: hidden;
-  transition: transform 0.2s ease;
   cursor: pointer;
   max-width: 300px;
   animation: fadeIn 1.5s ease forwards;
-  transition: transform 0.2s ease, color 0.3s ease;
+  position: relative;
+  transform: translateY(0) scale(1);
+  transition: all 0.3s ease;
+  animation: fadeIn 1.5s ease;
+}
 
-  &:hover {
-    transition: transform 0.2s ease, color 0.3s ease;
-    scale: 1.05;
-  }
+.card:hover {
+  transform: translateY(0) scale(1.15);
 }
 
 .image {
   width: 100%;
   height: 180px;
-  object-fit: cover;
+  border-radius: 0%;
+  margin: 0;
 }
 
 .content {
@@ -29,12 +31,12 @@
 .title {
   font-size: 1.25rem;
   margin: 0;
-  color: #fff;
+  color: #707070;
 }
 
 .description {
   font-size: 0.9rem;
-  color: #ddd;
+  color: #707070;
   margin-top: 0.5rem;
 }
 
