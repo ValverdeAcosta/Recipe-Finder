@@ -66,11 +66,11 @@ const Home: React.FC = () => {
               onChange={(e) => setTerm(e.target.value)}
             />
             <Button
-              variant="primary"
+              variant="search"
               onClick={handleSearch}
               disabled={!term.trim() || showFavorites}
             >
-              Search
+              Search !
             </Button>
           </div>
 
@@ -78,7 +78,7 @@ const Home: React.FC = () => {
             {ALPHABET.map((letter) => (
               <Button
                 key={letter}
-                variant="secondary"
+                variant="keycaps"
                 className={page === letter ? styles.selectedLetter : ""}
                 onClick={() => handleAlphabetClick(letter)}
               >

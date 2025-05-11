@@ -5,7 +5,7 @@ export type RecipeFullDetailedProps = {
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary";
+  variant?: "search" | "favorite" | "keycaps";
   children: React.ReactNode;
 }
 
