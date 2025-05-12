@@ -17,7 +17,7 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
   };
 
   return (
-    <div className={styles.grid}>
+    <div data-testid="recipe-list" className={styles.grid}>
       {recipes.map((recipe) => (
         <RecipeCard
           key={recipe.idMeal}

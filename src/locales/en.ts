@@ -3,6 +3,7 @@ export const LOCALES = {
     search: "Search !",
     showAll: "Show All 🗒️",
     favorites: "Favorites 🩷",
+    refresh: "Refresh 🔄",
   },
   placeholders: {
     search: "Enter a main ingredient or keyword...",

@@ -96,6 +96,7 @@ const Home: React.FC = () => {
             {ALPHABET.map((letter) => (
               <Button
                 key={letter}
+                data-testid="alphabet-button"
                 variant="keycaps"
                 className={
                   page === letter && !isSearchActive
