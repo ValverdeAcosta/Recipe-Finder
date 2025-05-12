@@ -2,14 +2,13 @@ import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import RecipeFullDetailedModal from "./RecipeFullDetailedModal";
+import * as RecipeContextModule from "../../../context/RecipeContext";
+import { mockRecipe } from "../../../mocks/recipes.mock";
+import { LOCALES_MODAL } from "../../../locales/en";
 
 vi.mock("../../../context/RecipeContext", () => ({
   useRecipeContext: vi.fn(),
 }));
-
-import * as RecipeContextModule from "../../../context/RecipeContext";
-import { mockRecipe } from "../../../mocks/recipes.mock";
-import LOCALES, { LOCALES_MODAL } from "../../../locales/en";
 
 describe("RecipeFullDetailedModal", () => {
   const mockOnClose = vi.fn();

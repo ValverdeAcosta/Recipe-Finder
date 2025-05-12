@@ -100,7 +100,7 @@ describe("useRecipeSearch", () => {
   });
 
   it("handles null API responses", async () => {
-    vi.mocked(axios.get).mockImplementation((url: string) => {
+    vi.mocked(axios.get).mockImplementation(() => {
       return Promise.resolve({ data: { meals: null } });
     });
 

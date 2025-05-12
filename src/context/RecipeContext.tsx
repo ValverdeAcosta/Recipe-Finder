@@ -57,6 +57,7 @@ export const RecipeProvider: React.FC<{ children: React.ReactNode }> = ({
       const data = await getRecipeDetailsById(id);
       setSelectedRecipe(data || null);
     } catch (error) {
+      console.error(error);
       setSelectedRecipe(null);
     }
   };
