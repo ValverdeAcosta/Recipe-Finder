@@ -32,14 +32,17 @@ const Home: React.FC = () => {
       : recipes;
   }, [recipes, showFavorites, favorites]);
 
-  const toggleFavorites = () => setShowFavorites((prev) => !prev);
+  const toggleFavorites = () => {
+    setShowFavorites((prev) => !prev);
+    setIsSearchActive(true);
+  };
 
   const handleSearch = () => {
     const trimmed = term.trim();
     if (trimmed) {
-      setIsSearchActive(true);
       searchRecipes(trimmed);
     }
+    setIsSearchActive(true);
   };
 
   const handleAlphabetClick = (letter: string) => {
@@ -53,9 +56,14 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isSearchActive) return;
+    if (isSearchActive && !showFavorites) return;
 
-    showFavorites ? getAllRecipes() : loadRecipesByPage(page);
+    if (showFavorites) {
+      getAllRecipes();
+      return;
+    }
+
+    loadRecipesByPage(page);
   }, [showFavorites, page, favorites]);
 
   return (
