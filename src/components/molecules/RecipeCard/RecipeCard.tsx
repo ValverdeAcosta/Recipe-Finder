@@ -32,9 +32,12 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
       </div>
       <div className={styles.favorite}>
         {isFavorite(id) ? (
-          <FaHeart onClick={handleFavoriteClick} />
+          <FaHeart data-testid="favorite-icon" onClick={handleFavoriteClick} />
         ) : (
-          <FaRegHeart onClick={handleFavoriteClick} />
+          <FaRegHeart
+            data-testid="favorite-icon"
+            onClick={handleFavoriteClick}
+          />
         )}
       </div>
     </div>
