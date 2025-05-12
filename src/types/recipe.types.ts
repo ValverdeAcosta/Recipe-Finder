@@ -21,9 +21,6 @@ export interface Recipe {
   strInstructions: string;
 }
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
-
 export interface RecipeListProps {
   recipes: Recipe[];
 }

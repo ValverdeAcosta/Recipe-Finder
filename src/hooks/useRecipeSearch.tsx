@@ -24,7 +24,7 @@ export const useRecipeSearch = () => {
 
       const ingredientResults = byIngredient.data.meals || [];
 
-      const detailPromises = ingredientResults.map((meal: any) =>
+      const detailPromises = ingredientResults.map((meal: Recipe) =>
         axios.get(`${BASE_URL}/lookup.php?i=${meal.idMeal}`)
       );
 
@@ -46,7 +46,7 @@ export const useRecipeSearch = () => {
       }
     } catch (err) {
       setRecipes([]);
-      console.error("Error fetching recipes.");
+      console.error("Error fetching recipes: ", err);
     }
   };
 
