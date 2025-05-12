@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./RecipeFullDetailedModal.module.scss";
 import { useRecipeContext } from "../../../context/RecipeContext";
 import type { RecipeFullDetailedProps } from "../../../types/recipe.types";
+import Title from "../../atoms/Title";
 
 const RecipeFullDetailedModal: React.FC<RecipeFullDetailedProps> = ({
   recipe,
@@ -29,7 +30,7 @@ const RecipeFullDetailedModal: React.FC<RecipeFullDetailedProps> = ({
   };
 
   return (
-    <div className={styles.overlay}>
+    <div className={styles.overlay} onClick={handleClose}>
       <div
         className={`${styles.modal} ${
           closing ? styles.fadeOut : styles.fadeIn
@@ -38,7 +39,7 @@ const RecipeFullDetailedModal: React.FC<RecipeFullDetailedProps> = ({
         <button className={styles.closeButton} onClick={handleClose}>
           ❌
         </button>
-        <h2>{recipe.strMeal}</h2>
+        <Title text={recipe.strMeal} variant="secondary" />
         <img src={recipe.strMealThumb} alt={recipe.strMeal} />
         <p>
           <strong>Category:</strong> {recipe.strCategory}

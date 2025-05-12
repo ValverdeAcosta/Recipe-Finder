@@ -60,7 +60,7 @@ const Home: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Title text="🍽️ Recipe Finder" />
+      <Title text="🍽️ Recipe Finder" variant="primary" />
 
       <Button onClick={toggleFavorites} className={styles.favoritesButton}>
         {showFavorites ? "Show All 🗒️" : "Favorites 🩷"}

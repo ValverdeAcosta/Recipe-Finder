@@ -11,6 +11,7 @@ export interface ButtonProps
 
 export interface TitleProps {
   text: string;
+  variant: "primary" | "secondary";
 }
 
 export interface Recipe {

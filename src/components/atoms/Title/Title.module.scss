@@ -2,11 +2,29 @@
   font-size: 2.5rem;
   text-align: center;
   margin: 2rem 0;
-  color: rgb(59, 59, 59);
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 1rem 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+  &.primary {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 3px solid #85327e;
+  }
+
+  &.secondary {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #34495e;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-style: italic;
+    border-bottom: 2px solid #dbb434;
+  }
 }
