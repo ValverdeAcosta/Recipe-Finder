@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styles from "./RecipeFullDetailedModal.module.scss";
-import { useFavorites } from "../../../hooks/useFavorites";
+import { useRecipeContext } from "../../../context/RecipeContext";
 import type { RecipeFullDetailedProps } from "../../../types/recipe.types";
 
 const RecipeFullDetailedModal: React.FC<RecipeFullDetailedProps> = ({
   recipe,
   onClose,
 }) => {
-  const { isFavorite, toggleFavorite } = useFavorites();
+  const { isFavorite, toggleFavorite } = useRecipeContext();
   const [closing, setClosing] = useState(false);
 
   const handleClose = () => {

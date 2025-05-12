@@ -56,18 +56,12 @@ export interface Recipe {
 export interface RecipeContextProps {
   recipes: Recipe[];
   selectedRecipe: Recipe | null;
-  favoriteStatus: boolean;
+  favorites: string[];
+  isFavorite: (id: string) => boolean;
+  toggleFavorite: (id: string) => void;
   setSelectedRecipe: (recipe: Recipe | null) => void;
   searchRecipes: (query: string) => Promise<void>;
   getRecipeDetails: (id: string) => Promise<void>;
   getAllRecipes: () => Promise<void>;
-  setFavoriteStatus: (isFav: boolean) => void;
-  loadRecipesByPage: (pageIndex: string) => Promise<void>;
-}
-
-export interface UseFavoritesReturn {
-  favorites: string[];
-  addFavorite: (recipeId: string) => void;
-  removeFavorite: (recipeId: string) => void;
-  isFavorite: (recipeId: string) => boolean;
+  loadRecipesByPage: (page: string) => Promise<void>;
 }

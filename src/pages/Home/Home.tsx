@@ -5,7 +5,6 @@ import Button from "../../components/atoms/Button";
 import styles from "./Home.module.scss";
 import RecipeList from "../../components/organisms/RecipeList";
 import { useRecipeContext } from "../../context/RecipeContext";
-import { useFavorites } from "../../hooks/useFavorites";
 import RecipeFullDetailedModal from "../../components/molecules/RecipeFullDetailedModal/RecipeFullDetailedModal";
 import { LuRefreshCcw } from "react-icons/lu";
 
@@ -18,21 +17,20 @@ const Home: React.FC = () => {
   const {
     recipes,
     selectedRecipe,
+    favorites,
     setSelectedRecipe,
     searchRecipes,
     getAllRecipes,
     loadRecipesByPage,
-    favoriteStatus,
   } = useRecipeContext();
 
-  const { stored } = useFavorites();
   const ALPHABET = "abcdefghijklmnopqrstuvwxyz".split("");
 
   const displayedRecipes = useMemo(() => {
     return showFavorites
-      ? recipes.filter((recipe) => stored?.includes(recipe.idMeal))
+      ? recipes.filter((recipe) => favorites.includes(recipe.idMeal))
       : recipes;
-  }, [recipes, showFavorites]);
+  }, [recipes, showFavorites, favorites]);
 
   const toggleFavorites = () => setShowFavorites((prev) => !prev);
 
@@ -58,7 +56,7 @@ const Home: React.FC = () => {
     if (isSearchActive) return;
 
     showFavorites ? getAllRecipes() : loadRecipesByPage(page);
-  }, [showFavorites, page, favoriteStatus]);
+  }, [showFavorites, page, favorites]);
 
   return (
     <div className={styles.container}>
