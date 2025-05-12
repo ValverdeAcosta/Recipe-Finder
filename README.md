@@ -40,15 +40,23 @@ npm run preview
 
 ## 📁 Project Structure
 
-src/components — Reusable UI components
+src/components — Reusable UI components built by Atomic Design standart
 
-src/pages — Page-level components
+src/pages — Page-level components (Only Home as Landing Page)
 
-src/api — API-related logic
+src/services — API-related logic
 
-src/hooks — Custom hooks
+src/hooks — Custom hooks for (S)OLID SRP
 
-src/styles — SCSS styles
+src/context — ContextAPI for state management
+
+src/mocks — variable's imitations for checking their behaviour over tests
+
+src/types — types isolated ready to import
+
+src/locales — Locales for implementing i18n translations in the future...
+
+cypress — e2e tests
 
 ## 🧠 Notes
 
