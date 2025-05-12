@@ -4,7 +4,6 @@ import "@testing-library/jest-dom";
 import RecipeList from "./RecipeList";
 import { mockRecipes } from "../../../mocks/recipes.mock";
 
-// Mock the RecipeCard component
 vi.mock("../../molecules/RecipeCard", () => ({
   default: ({ title, description }: { title: string; description: string }) => (
     <div data-testid="recipe-card">
@@ -14,7 +13,6 @@ vi.mock("../../molecules/RecipeCard", () => ({
   ),
 }));
 
-// Mock the RecipeContext
 vi.mock("../../../context/RecipeContext", () => ({
   useRecipeContext: () => ({
     toggleFavorite: vi.fn(),

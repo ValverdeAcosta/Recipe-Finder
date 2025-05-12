@@ -38,7 +38,6 @@ describe("Input", () => {
 
   it("accepts different input types", () => {
     render(<Input type="password" />);
-    // Use getByTestId instead of getByRole for password inputs
     const input = screen.getByDisplayValue("");
     expect(input).toHaveAttribute("type", "password");
   });
