@@ -22,7 +22,11 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
   };
 
   return (
-    <div className={styles.card} onClick={openFullDetails}>
+    <div
+      data-testid="recipe-card"
+      className={styles.card}
+      onClick={openFullDetails}
+    >
       <div>
         <img src={image} alt={title} className={styles.image} />
         <div className={styles.content}>

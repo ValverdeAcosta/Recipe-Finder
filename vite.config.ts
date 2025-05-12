@@ -24,6 +24,7 @@ export default defineConfig({
         "**/*.d.ts",
         "**/vite.config.*",
         "**/vitest.config.*",
+        "src/main.tsx",
       ],
     },
   },

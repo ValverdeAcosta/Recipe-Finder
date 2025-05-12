@@ -56,7 +56,7 @@ describe("API Service", () => {
 
       const result = await fetchAllRecipes();
 
-      expect(result).toHaveLength(26); // One recipe per letter
+      expect(result).toHaveLength(26);
       expect(axios.get).toHaveBeenCalledTimes(26);
       expect(axios.get).toHaveBeenCalledWith(
         expect.stringMatching(`${BASE_URL}/search.php\\?f=[a-z]`)
