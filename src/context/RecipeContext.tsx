@@ -1,5 +1,4 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
-
 import type { Recipe, RecipeContextProps } from "../types/recipe.types";
 import {
   getRecipeDetailsById,

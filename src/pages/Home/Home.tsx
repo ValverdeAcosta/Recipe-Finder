@@ -7,6 +7,7 @@ import RecipeList from "../../components/organisms/RecipeList";
 import { useRecipeContext } from "../../context/RecipeContext";
 import RecipeFullDetailedModal from "../../components/molecules/RecipeFullDetailedModal/RecipeFullDetailedModal";
 import { LuRefreshCcw } from "react-icons/lu";
+import { LOCALES } from "../../locales/en";
 
 const Home: React.FC = () => {
   const [term, setTerm] = useState("");
@@ -68,16 +69,17 @@ const Home: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Title text="🍽️ Recipe Finder" variant="primary" />
+      <Title text={LOCALES.titles.main} variant="primary" />
 
       <Button onClick={toggleFavorites} className={styles.favoritesButton}>
-        {showFavorites ? "Show All 🗒️" : "Favorites 🩷"}
+        {showFavorites ? LOCALES.buttons.showAll : LOCALES.buttons.favorites}
       </Button>
+
       {!showFavorites && (
         <div className={styles.searchBox}>
           <div className={styles.searchBar}>
             <Input
-              placeholder="Enter a main ingredient or keyword..."
+              placeholder={LOCALES.placeholders.search}
               value={term}
               onChange={(e) => setTerm(e.target.value)}
             />
@@ -86,7 +88,7 @@ const Home: React.FC = () => {
               onClick={handleSearch}
               disabled={!term.trim() || showFavorites}
             >
-              Search !
+              {LOCALES.buttons.search}
             </Button>
           </div>
 

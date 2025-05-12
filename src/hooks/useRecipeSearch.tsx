@@ -1,11 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import type { Recipe } from "../types/recipe.types";
+import { BASE_URL } from "../services/api";
 
 export const useRecipeSearch = () => {
   const [matchingRecipes, setRecipes] = useState<Recipe[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const search = async (query: string) => {
     if (!query.trim()) {
@@ -13,29 +12,20 @@ export const useRecipeSearch = () => {
       return;
     }
 
-    setLoading(true);
-    setError("");
-
     try {
       const byTitle = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(
-          query
-        )}`
+        `${BASE_URL}/search.php?s=${encodeURIComponent(query)}`
       );
       const recipesByTitle = byTitle.data.meals || [];
 
       const byIngredient = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(
-          query
-        )}`
+        `${BASE_URL}/filter.php?i=${encodeURIComponent(query)}`
       );
 
       const ingredientResults = byIngredient.data.meals || [];
 
       const detailPromises = ingredientResults.map((meal: any) =>
-        axios.get(
-          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`
-        )
+        axios.get(`${BASE_URL}/lookup.php?i=${meal.idMeal}`)
       );
 
       const detailResponses = await Promise.all(detailPromises);
@@ -53,15 +43,12 @@ export const useRecipeSearch = () => {
         return uniqueRecipes;
       } else {
         setRecipes([]);
-        setError("No recipes found.");
       }
     } catch (err) {
       setRecipes([]);
-      setError("Error fetching recipes.");
-    } finally {
-      setLoading(false);
+      console.error("Error fetching recipes.");
     }
   };
 
-  return { matchingRecipes, loading, error, search };
+  return { matchingRecipes, search };
 };

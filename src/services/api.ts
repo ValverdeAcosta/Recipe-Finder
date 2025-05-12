@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { Recipe } from "../types/recipe.types";
 
-const BASE_URL = "https://www.themealdb.com/api/json/v1/1";
+export const BASE_URL = "https://www.themealdb.com/api/json/v1/1";
 
 export const getRecipeDetailsById = async (
   id: string
