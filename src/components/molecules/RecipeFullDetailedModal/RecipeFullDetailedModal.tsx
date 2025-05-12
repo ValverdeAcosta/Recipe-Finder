@@ -33,8 +33,9 @@ const RecipeFullDetailedModal: React.FC<RecipeFullDetailedProps> = ({
   };
 
   return (
-    <div className={styles.overlay} onClick={handleClose}>
+    <div data-testid="overlay" className={styles.overlay} onClick={handleClose}>
       <div
+        data-testid="modal"
         className={`${styles.modal} ${
           closing ? styles.fadeOut : styles.fadeIn
         }`}
