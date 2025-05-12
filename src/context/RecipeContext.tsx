@@ -26,23 +26,39 @@ export const RecipeProvider: React.FC<{ children: React.ReactNode }> = ({
   const { search } = useRecipeSearch();
 
   const searchRecipes = async (query: string) => {
-    const data = await search(query);
-    setRecipes(data || []);
-  };
-
-  const getRecipeDetails = async (id: string) => {
-    const data = await getRecipeDetailsById(id);
-    setSelectedRecipe(data || null);
+    try {
+      const data = await search(query);
+      setRecipes(data || []);
+    } catch {
+      setRecipes([]);
+    }
   };
 
   const getAllRecipes = async () => {
-    const data = await fetchAllRecipes();
-    setRecipes(data || []);
+    try {
+      const data = await fetchAllRecipes();
+      setRecipes(data || []);
+    } catch {
+      setRecipes([]);
+    }
   };
 
   const loadRecipesByPage = async (page: string) => {
-    const data = await fetchRecipesByPage(page);
-    setRecipes(data || []);
+    try {
+      const data = await fetchRecipesByPage(page);
+      setRecipes(data || []);
+    } catch {
+      setRecipes([]);
+    }
+  };
+
+  const getRecipeDetails = async (id: string) => {
+    try {
+      const data = await getRecipeDetailsById(id);
+      setSelectedRecipe(data || null);
+    } catch (error) {
+      setSelectedRecipe(null);
+    }
   };
 
   const isFavorite = useCallback(
