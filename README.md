@@ -63,3 +63,5 @@ cypress — e2e tests
 All recipe data is fetched from the open API: https://www.themealdb.com/api.php
 
 Favorites will be saved on localstorage.
+
+You can check my decisions over the project clicking on Commits, I have tried to make each message as descriptive as possible, using Conventional Commits Standart.
