@@ -6,11 +6,9 @@ import * as api from "../services/api";
 import { useRecipeSearch } from "../hooks/useRecipeSearch";
 import { mockRecipe } from "../mocks/recipes.mock";
 
-// Mock the API and useRecipeSearch hook
 vi.mock("../services/api");
 vi.mock("../hooks/useRecipeSearch");
 
-// Mock localStorage
 const mockLocalStorage = {
   getItem: vi.fn(),
   setItem: vi.fn(),
@@ -19,7 +17,6 @@ Object.defineProperty(window, "localStorage", {
   value: mockLocalStorage,
 });
 
-// Wrapper component for testing hooks
 const wrapper = ({ children }: { children: ReactNode }) => (
   <RecipeProvider>{children}</RecipeProvider>
 );
@@ -27,7 +24,7 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 describe("RecipeContext", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockLocalStorage.getItem.mockReturnValue(null);
+    mockLocalStorage.getItem.mockReturnValue(undefined);
     vi.mocked(useRecipeSearch).mockReturnValue({
       search: vi.fn().mockResolvedValue([mockRecipe]),
       matchingRecipes: [],
@@ -98,6 +95,47 @@ describe("RecipeContext", () => {
 
       expect(result.current.recipes).toEqual([mockRecipe]);
     });
+
+    it("loads recipes by page getting undefined", async () => {
+      vi.mocked(api.fetchRecipesByPage).mockResolvedValue(undefined);
+      const { result } = renderHook(() => useRecipeContext(), { wrapper });
+
+      await act(async () => {
+        await result.current.loadRecipesByPage("a");
+      });
+
+      expect(result.current.recipes).toEqual([]);
+    });
+
+    it("handles undefined data when loading all recipes", async () => {
+      vi.mocked(api.fetchAllRecipes).mockResolvedValue(undefined);
+      const { result } = renderHook(() => useRecipeContext(), { wrapper });
+
+      await act(async () => {
+        await result.current.getAllRecipes();
+      });
+
+      expect(result.current.recipes).toEqual([]);
+
+      vi.mocked(api.fetchAllRecipes).mockResolvedValue(undefined);
+
+      await act(async () => {
+        await result.current.getAllRecipes();
+      });
+
+      expect(result.current.recipes).toEqual([]);
+    });
+
+    it("sets selectedRecipe to null when API returns undefined", async () => {
+      vi.mocked(api.getRecipeDetailsById).mockResolvedValue(undefined);
+      const { result } = renderHook(() => useRecipeContext(), { wrapper });
+
+      await act(async () => {
+        await result.current.getRecipeDetails("1");
+      });
+
+      expect(result.current.selectedRecipe).toBeNull();
+    });
   });
 
   describe("Favorite operations", () => {
@@ -143,6 +181,6 @@ describe("RecipeContext", () => {
       await result.current.getRecipeDetails("1");
     });
 
-    expect(result.current.selectedRecipe).toBeNull();
+    expect(result.current.selectedRecipe).toBeUndefined();
   });
 });

@@ -25,6 +25,8 @@ export default defineConfig({
         "**/vite.config.*",
         "**/vitest.config.*",
         "src/main.tsx",
+        "cypress/**",
+        "**/cypress.config.ts",
       ],
     },
   },

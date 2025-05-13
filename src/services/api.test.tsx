@@ -38,7 +38,7 @@ describe("API Service", () => {
       });
 
       const result = await getRecipeDetailsById("999");
-      expect(result).toBeNull();
+      expect(result).toBeUndefined();
     });
 
     it("handles fetch errors", async () => {

@@ -25,10 +25,26 @@ Run unit tests:
 npm run test
 ```
 
+To View the Coverage (Should be >80%):
+
+```bash
+npm run coverage
+```
+
 Run E2E tests:
+
+_Make sure you have the project running_
+
+- Visual (Browser/Electron)
 
 ```bash
 npm run cy:open
+```
+
+- Terminal:
+
+```bash
+npm run cy:run
 ```
 
 ## 📦 Build

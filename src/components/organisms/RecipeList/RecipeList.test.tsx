@@ -59,4 +59,26 @@ describe("RecipeList", () => {
     render(<RecipeList recipes={[]} />);
     expect(screen.queryByTestId("recipe-card")).not.toBeInTheDocument();
   });
+
+  it("generates fallback description when no instructions are present", () => {
+    const recipesWithoutInstructions = [
+      {
+        ...mockRecipes[0],
+        strInstructions: "",
+        strCategory: "Seafood",
+        strArea: "Italian",
+      },
+      {
+        ...mockRecipes[0],
+        strInstructions: "",
+        strCategory: "Dessert",
+        strArea: "",
+      },
+    ];
+
+    render(<RecipeList recipes={recipesWithoutInstructions} />);
+
+    expect(screen.getByText("Seafood dish from Italian")).toBeInTheDocument();
+    expect(screen.getByText("Dessert dish")).toBeInTheDocument();
+  });
 });

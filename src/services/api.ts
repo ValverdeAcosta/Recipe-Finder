@@ -5,13 +5,13 @@ export const BASE_URL = "https://www.themealdb.com/api/json/v1/1";
 
 export const getRecipeDetailsById = async (
   id: string
-): Promise<Recipe | null> => {
+): Promise<Recipe | undefined> => {
   const res = await fetch(`${BASE_URL}/lookup.php?i=${id}`);
   const json = await res.json();
-  return json.meals ? json.meals[0] : null;
+  return json.meals ? json.meals[0] : undefined;
 };
 
-export const fetchAllRecipes = async (): Promise<Recipe[]> => {
+export const fetchAllRecipes = async (): Promise<Recipe[] | undefined> => {
   const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
   const requests = alphabet.map((letter) =>
     axios
@@ -25,11 +25,13 @@ export const fetchAllRecipes = async (): Promise<Recipe[]> => {
     return results.flat();
   } catch (error) {
     console.error("Error fetching all recipes by alphabet:", error);
-    return [];
+    return undefined;
   }
 };
 
-export const fetchRecipesByPage = async (query: string): Promise<Recipe[]> => {
+export const fetchRecipesByPage = async (
+  query: string
+): Promise<Recipe[] | undefined> => {
   const request = axios
     .get(`${BASE_URL}/search.php?f=${query}`)
     .then((res) => res.data.meals || [])
@@ -40,6 +42,6 @@ export const fetchRecipesByPage = async (query: string): Promise<Recipe[]> => {
     return meals;
   } catch (error) {
     console.error("Error fetching all recipes by page:", error);
-    return [];
+    return undefined;
   }
 };
